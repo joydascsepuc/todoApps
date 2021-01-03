@@ -9,6 +9,7 @@
 		      <th scope="col">Title</th>
 		      <th scope="col">Content</th>
 		      <th scope="col">Due</th>
+		      <th scope="col">Actions</th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -19,6 +20,14 @@
 			      <td><a href="/todo/{{$todo->id}}">{{ $todo->title }}</a></td>
 			      <td>{{ $todo->content }}</td>
 			      <td>{{ $todo->due }}</td>
+			      <td>
+			      	<a href="todo/{{$todo->id}}/edit" class="btn btn-primary float-left btn-sm">Edit</a>
+			      	<form method="post" action="/todo/{{ $todo->id }}">
+			      		@csrf
+			      		@method('DELETE')
+			      		<button type="submit" class="btn btn-danger btn-sm">Delete</button>
+			      	</form>
+			      </td>
 			    </tr>
 			<?php $i++;?>
 			@endforeach

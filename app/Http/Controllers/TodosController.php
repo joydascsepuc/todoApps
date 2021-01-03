@@ -25,7 +25,7 @@ class TodosController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.create');
     }
 
     /**
@@ -36,7 +36,18 @@ class TodosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required',
+            'due' => 'required'
+        ]);
+
+        $todo = new Todo();
+        $todo->title = $request->input('title');
+        $todo->content = $request->input('content');
+        $todo->due = $request->input('due');
+        $todo->save();
+        return redirect('/')->with('success','Todo Added Successfully');
     }
 
     /**
@@ -59,7 +70,8 @@ class TodosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $todo = Todo::find($id);
+        return view('pages.edit')->with('todo',$todo);
     }
 
     /**
@@ -71,7 +83,18 @@ class TodosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required',
+            'due' => 'required'
+        ]);
+
+        $todo = Todo::Find($id);
+        $todo->title = $request->input('title');
+        $todo->content = $request->input('content');
+        $todo->due = $request->input('due');
+        $todo->save();
+        return redirect('/')->with('success','Todo Updated Successfully.!');
     }
 
     /**
@@ -82,6 +105,8 @@ class TodosController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $todo = Todo::Find($id);
+       $todo->delete();
+       return redirect('/')->with('success','Todo Deleted Successfully.!');
     }
 }
