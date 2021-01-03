@@ -18,10 +18,11 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 //Routes of Pages
-Route::get('/', 'App\Http\Controllers\PagesController@index')->name('homePage');
+// Route::get('/', 'App\Http\Controllers\PagesController@index')->name('homePage');
 
 //Routes of TodoController
-Route::resource('todos', 'App\Http\Controllers\TodosController');
+Route::get('/', 'App\Http\Controllers\TodosController@index')->name('homePage');
+Route::resource('todo', 'App\Http\Controllers\TodosController');
 
 /*Routes of Auths*/
 Auth::routes();
